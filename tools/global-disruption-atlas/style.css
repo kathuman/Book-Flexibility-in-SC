@@ -15,6 +15,8 @@
   --geopolitical: #ff5c7a;
   --buffer: #7cff8a;
   --altsupplier: #c98bff;
+  --warehouse: #2dd4bf;
+  --danger: #ff6b7a;
 }
 
 * { box-sizing: border-box; }
@@ -99,6 +101,61 @@ html, body {
   font-size: 13px;
 }
 
+.field-label {
+  display: block;
+  font-size: 11px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 10px 0 4px;
+}
+.field-label select,
+.field-label input[type="file"] {
+  display: block;
+  width: 100%;
+  margin-top: 4px;
+  background: #0a0f1c;
+  color: var(--text);
+  border: 1px solid var(--panel-border);
+  border-radius: 6px;
+  padding: 6px;
+  font-size: 12px;
+  text-transform: none;
+  letter-spacing: normal;
+}
+.field-label input[type="file"]::file-selector-button {
+  background: rgba(63,208,255,0.12);
+  color: var(--accent);
+  border: 1px solid var(--panel-border);
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 11px;
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+.btn-link {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--panel-border);
+  color: var(--accent);
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 11px;
+  cursor: pointer;
+}
+.btn-link:hover { background: rgba(63,208,255,0.1); }
+.btn-link.warn { color: var(--danger); }
+.btn-link.warn:hover { background: rgba(255,107,122,0.1); }
+
+#network-status.error { color: var(--danger); }
+#network-status.success { color: var(--rerouted); }
+
 .narrative {
   font-size: 12px;
   line-height: 1.5;
@@ -127,6 +184,7 @@ html, body {
 .legend li { display: flex; align-items: center; gap: 8px; padding: 3px 0; color: var(--text-dim); }
 .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
 .dot.port { background: var(--port); }
+.dot.warehouse { background: var(--warehouse); }
 .dot.factory { background: var(--factory); }
 .dot.buffer { background: var(--buffer); box-shadow: 0 0 6px var(--buffer); }
 .dot.altsupplier { background: var(--altsupplier); box-shadow: 0 0 6px var(--altsupplier); }

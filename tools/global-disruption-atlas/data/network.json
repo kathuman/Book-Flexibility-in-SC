@@ -16,6 +16,11 @@
     { "id": "capetown", "name": "Cape Town", "lat": -33.9249, "lng": 18.4241, "throughputTEU": 900000 },
     { "id": "houston", "name": "Houston", "lat": 29.7604, "lng": -95.3698, "throughputTEU": 4200000 }
   ],
+  "warehouses": [
+    { "id": "dc-memphis", "name": "Memphis Distribution Center", "lat": 35.1495, "lng": -90.0490, "detail": "Central US regional DC, rail/air feeder from LA/LB" },
+    { "id": "dc-venlo", "name": "Venlo European DC", "lat": 51.3704, "lng": 6.1724, "detail": "European regional DC fed from Rotterdam" },
+    { "id": "dc-suzhou", "name": "Suzhou Buffer Warehouse", "lat": 31.2989, "lng": 120.5853, "detail": "Overflow buffer stock near Shanghai" }
+  ],
   "factories": [
     { "id": "shenzhen", "name": "Shenzhen Electronics Cluster", "lat": 22.5431, "lng": 114.0579, "sector": "Electronics", "feederPort": "shanghai" },
     { "id": "chennai", "name": "Chennai Auto & Components", "lat": 13.0827, "lng": 80.2707, "sector": "Automotive", "feederPort": "nhavasheva" },
@@ -45,6 +50,9 @@
     { "id": "monterrey-lalb", "from": "monterrey", "to": "la-lb", "lane": "Feeder (rail/road)", "baselineDays": 3 },
     { "id": "guadalajara-manzanillo", "from": "guadalajara", "to": "manzanillo", "lane": "Feeder (rail/road)", "baselineDays": 1 },
     { "id": "penang-singapore", "from": "penang", "to": "singapore", "lane": "Feeder", "baselineDays": 2 },
-    { "id": "bangalore-nhavasheva", "from": "bangalore", "to": "nhavasheva", "lane": "Feeder", "baselineDays": 2 }
+    { "id": "bangalore-nhavasheva", "from": "bangalore", "to": "nhavasheva", "lane": "Feeder", "baselineDays": 2 },
+    { "id": "lalb-memphis", "from": "la-lb", "to": "dc-memphis", "lane": "Distribution", "baselineDays": 3 },
+    { "id": "rotterdam-venlo", "from": "rotterdam", "to": "dc-venlo", "lane": "Distribution", "baselineDays": 1 },
+    { "id": "shanghai-suzhou", "from": "shanghai", "to": "dc-suzhou", "lane": "Distribution", "baselineDays": 1 }
   ]
 }
