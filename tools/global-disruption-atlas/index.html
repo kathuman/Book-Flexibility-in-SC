@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Global Disruption Atlas — Flexibility in Supply Chain</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <header id="topbar">
+      <div id="brand">
+        <span class="brand-mark">&#9673;</span>
+        <div>
+          <h1>Global Disruption Atlas</h1>
+          <p class="subtitle">Prototype companion tool &mdash; <em>Flexibility in Supply Chain</em></p>
+        </div>
+      </div>
+      <div id="clock-wrap">
+        <span id="clock-label">Simulated feed time</span>
+        <span id="clock">--:--:--</span>
+      </div>
+    </header>
+
+    <div id="main">
+      <aside id="sidebar">
+        <section class="panel">
+          <h2>Layers</h2>
+          <label class="toggle"><input type="checkbox" id="toggle-ports" checked><span>Ports</span></label>
+          <label class="toggle"><input type="checkbox" id="toggle-factories" checked><span>Factories</span></label>
+          <label class="toggle"><input type="checkbox" id="toggle-corridors" checked><span>Trade corridors</span></label>
+          <label class="toggle"><input type="checkbox" id="toggle-disruptions" checked><span>Disruption signals</span></label>
+          <label class="toggle"><input type="checkbox" id="toggle-labels"><span>Node labels</span></label>
+        </section>
+
+        <section class="panel">
+          <h2>Scenario overlay</h2>
+          <select id="scenario-select"></select>
+          <p id="scenario-narrative" class="narrative"></p>
+          <div id="scenario-stats" class="scenario-stats"></div>
+        </section>
+
+        <section class="panel">
+          <h2>Legend</h2>
+          <ul class="legend">
+            <li><span class="dot port"></span> Port</li>
+            <li><span class="dot factory"></span> Factory</li>
+            <li><span class="line baseline"></span> Baseline corridor</li>
+            <li><span class="line disrupted"></span> Disrupted corridor</li>
+            <li><span class="line rerouted"></span> Scenario reroute</li>
+            <li><span class="ring weather"></span> Weather alert</li>
+            <li><span class="ring strike"></span> Labor action</li>
+            <li><span class="ring geopolitical"></span> Geopolitical alert</li>
+            <li><span class="dot buffer"></span> Buffer stock activated</li>
+            <li><span class="dot altsupplier"></span> Alternate supplier activated</li>
+          </ul>
+        </section>
+
+        <section class="panel" id="signal-feed-panel">
+          <h2>Live signal feed</h2>
+          <ul id="signal-feed"></ul>
+        </section>
+      </aside>
+
+      <main id="globe-wrap">
+        <div id="globe"></div>
+        <div id="info-panel" class="hidden">
+          <button id="info-close" aria-label="Close">&times;</button>
+          <div id="info-body"></div>
+        </div>
+        <div id="loading">Loading atlas&hellip;</div>
+      </main>
+    </div>
+  </div>
+
+  <script src="vendor/globe.gl.min.js"></script>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

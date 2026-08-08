@@ -1,0 +1,62 @@
+[
+  {
+    "id": "redsea-geo",
+    "type": "geopolitical",
+    "name": "Red Sea / Bab-el-Mandeb Security Alert",
+    "lat": 13.0,
+    "lng": 43.3,
+    "severity": 5,
+    "description": "Vessel attacks and rerouting advisories in the southern Red Sea are pushing carriers away from the Suez Canal approach.",
+    "affectsCorridors": ["shanghai-rotterdam", "singapore-rotterdam", "jebelali-rotterdam", "nhavasheva-rotterdam"]
+  },
+  {
+    "id": "taiwanstrait-weather",
+    "type": "weather",
+    "name": "Typhoon Track - Taiwan Strait",
+    "lat": 23.5,
+    "lng": 121.0,
+    "severity": 4,
+    "description": "Tropical cyclone forecast to cross major East Asia shipping lanes, risking port closures at Shanghai and Ningbo.",
+    "affectsCorridors": ["shanghai-lalb", "ningbo-lalb", "shanghai-rotterdam", "shenzhen-shanghai"]
+  },
+  {
+    "id": "rotterdam-strike",
+    "type": "strike",
+    "name": "Rotterdam Dockworker Strike",
+    "lat": 51.9244,
+    "lng": 4.4777,
+    "severity": 3,
+    "description": "Union action over automation and pay is slowing container handling at Europe's largest port.",
+    "affectsCorridors": ["shanghai-rotterdam", "singapore-rotterdam", "jebelali-rotterdam", "nhavasheva-rotterdam", "santos-rotterdam", "wroclaw-rotterdam"]
+  },
+  {
+    "id": "panama-drought",
+    "type": "weather",
+    "name": "Panama Canal Draft Restrictions",
+    "lat": 8.95,
+    "lng": -79.5667,
+    "severity": 3,
+    "description": "Low reservoir levels are capping daily transits and vessel draft, creating queues and forcing cargo offloads.",
+    "affectsCorridors": ["shanghai-panama-santos", "panama-houston"]
+  },
+  {
+    "id": "lalb-strike",
+    "type": "strike",
+    "name": "West Coast Port Labor Action",
+    "lat": 33.7550,
+    "lng": -118.2160,
+    "severity": 4,
+    "description": "Contract dispute at Los Angeles / Long Beach is causing intermittent slowdowns and vessel bunching.",
+    "affectsCorridors": ["shanghai-lalb", "ningbo-lalb", "busan-lalb", "monterrey-lalb"]
+  },
+  {
+    "id": "northatlantic-weather",
+    "type": "weather",
+    "name": "North Atlantic Winter Storm System",
+    "lat": 54.5,
+    "lng": 2.0,
+    "severity": 2,
+    "description": "Gale-force conditions in the North Sea approach are delaying berthing windows at Hamburg and Rotterdam.",
+    "affectsCorridors": ["santos-rotterdam", "wroclaw-rotterdam"]
+  }
+]

@@ -1,0 +1,67 @@
+[
+  {
+    "id": "baseline",
+    "name": "Baseline Network",
+    "shortLabel": "Baseline (no active response)",
+    "narrative": "The network is operating on its normal lanes and lead times. No rerouting, buffering, or alternate-sourcing actions are active.",
+    "extraTransitDays": 0,
+    "disabledCorridors": [],
+    "addedArcs": [],
+    "bufferSites": [],
+    "alternateSuppliers": []
+  },
+  {
+    "id": "redsea-reroute",
+    "name": "Red Sea Crisis — Cape of Good Hope Reroute",
+    "shortLabel": "Reroute: Suez → Cape of Good Hope",
+    "narrative": "In response to the Red Sea security alert, Asia–Europe and Middle East–Europe strings are diverted around the Cape of Good Hope. This adds roughly 10–14 days and 3,000+ nautical miles per voyage, and absorbs vessel capacity that would otherwise serve other lanes.",
+    "extraTransitDays": 12,
+    "disabledCorridors": ["shanghai-rotterdam", "singapore-rotterdam", "jebelali-rotterdam", "nhavasheva-rotterdam"],
+    "addedArcs": [
+      { "id": "shanghai-capetown", "from": "shanghai", "to": "capetown", "lane": "Cape Reroute", "note": "Diverted around Cape of Good Hope" },
+      { "id": "singapore-capetown", "from": "singapore", "to": "capetown", "lane": "Cape Reroute", "note": "Diverted around Cape of Good Hope" },
+      { "id": "jebelali-capetown", "from": "jebelali", "to": "capetown", "lane": "Cape Reroute", "note": "Diverted around Cape of Good Hope" },
+      { "id": "nhavasheva-capetown", "from": "nhavasheva", "to": "capetown", "lane": "Cape Reroute", "note": "Diverted around Cape of Good Hope" },
+      { "id": "capetown-rotterdam", "from": "capetown", "to": "rotterdam", "lane": "Cape Reroute", "note": "Final leg into Northern Europe" }
+    ],
+    "bufferSites": [
+      { "portId": "rotterdam", "note": "Safety stock raised ~2 weeks to cover extended transit" }
+    ],
+    "alternateSuppliers": []
+  },
+  {
+    "id": "panama-buffer",
+    "name": "Panama Canal Drought — Inventory Buffer + Rail Landbridge",
+    "shortLabel": "Buffer + Landbridge: Panama drought",
+    "narrative": "Low reservoir levels cap daily transits through Panama. Cargo bound for the Gulf and East Coast is shifted to a West Coast discharge plus rail landbridge, while distribution centers draw down pre-positioned buffer stock to cover the gap.",
+    "extraTransitDays": 6,
+    "disabledCorridors": ["panama-houston"],
+    "addedArcs": [
+      { "id": "lalb-houston-landbridge", "from": "la-lb", "to": "houston", "lane": "Rail Landbridge", "note": "West Coast discharge + rail to Gulf, bypassing the canal" }
+    ],
+    "bufferSites": [
+      { "portId": "houston", "note": "14 days of safety stock activated for Gulf Coast distribution" },
+      { "portId": "la-lb", "note": "Buffer inventory drawn down to cover landbridge lead time" }
+    ],
+    "alternateSuppliers": []
+  },
+  {
+    "id": "lalb-altsupplier",
+    "name": "West Coast Port Strike — Alternate Gateway + Supplier Activation",
+    "shortLabel": "Reroute + alt-source: LA/LB strike",
+    "narrative": "Labor action at Los Angeles / Long Beach halts Trans-Pacific discharge. Volume is redirected through Manzanillo, Mexico, with rail feeder to Monterrey, while a qualified alternate electronics supplier in Guadalajara is activated to keep production running.",
+    "extraTransitDays": 8,
+    "disabledCorridors": ["shanghai-lalb", "ningbo-lalb", "busan-lalb", "monterrey-lalb"],
+    "addedArcs": [
+      { "id": "shanghai-manzanillo", "from": "shanghai", "to": "manzanillo", "lane": "Alt Gateway", "note": "Redirected from LA/LB" },
+      { "id": "ningbo-manzanillo", "from": "ningbo", "to": "manzanillo", "lane": "Alt Gateway", "note": "Redirected from LA/LB" },
+      { "id": "manzanillo-monterrey", "from": "manzanillo", "to": "monterrey", "lane": "Rail Feeder", "note": "Replaces LA/LB rail feeder" }
+    ],
+    "bufferSites": [
+      { "portId": "manzanillo", "note": "Surge capacity utilized as alternate West Coast gateway" }
+    ],
+    "alternateSuppliers": [
+      { "factoryId": "guadalajara", "note": "Qualified as alternate electronics source while LA/LB is disrupted" }
+    ]
+  }
+]

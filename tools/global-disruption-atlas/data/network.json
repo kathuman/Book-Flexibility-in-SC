@@ -1,0 +1,50 @@
+{
+  "ports": [
+    { "id": "shanghai", "name": "Shanghai", "lat": 31.2304, "lng": 121.4737, "throughputTEU": 47300000 },
+    { "id": "ningbo", "name": "Ningbo-Zhoushan", "lat": 29.8683, "lng": 121.5440, "throughputTEU": 33350000 },
+    { "id": "singapore", "name": "Singapore", "lat": 1.3521, "lng": 103.8198, "throughputTEU": 37200000 },
+    { "id": "rotterdam", "name": "Rotterdam", "lat": 51.9244, "lng": 4.4777, "throughputTEU": 14500000 },
+    { "id": "hamburg", "name": "Hamburg", "lat": 53.5459, "lng": 9.9681, "throughputTEU": 8300000 },
+    { "id": "la-lb", "name": "Los Angeles / Long Beach", "lat": 33.7550, "lng": -118.2160, "throughputTEU": 17300000 },
+    { "id": "busan", "name": "Busan", "lat": 35.1796, "lng": 129.0756, "throughputTEU": 22700000 },
+    { "id": "jebelali", "name": "Jebel Ali (Dubai)", "lat": 25.0118, "lng": 55.0618, "throughputTEU": 14100000 },
+    { "id": "nhavasheva", "name": "Nhava Sheva (Mumbai)", "lat": 18.9490, "lng": 72.9525, "throughputTEU": 6100000 },
+    { "id": "santos", "name": "Santos", "lat": -23.9608, "lng": -46.3339, "throughputTEU": 4700000 },
+    { "id": "piraeus", "name": "Piraeus", "lat": 37.9475, "lng": 23.6347, "throughputTEU": 5400000 },
+    { "id": "panama", "name": "Balboa (Panama Canal)", "lat": 8.9500, "lng": -79.5667, "throughputTEU": 3800000 },
+    { "id": "manzanillo", "name": "Manzanillo (Mexico)", "lat": 19.0546, "lng": -104.3157, "throughputTEU": 3900000 },
+    { "id": "capetown", "name": "Cape Town", "lat": -33.9249, "lng": 18.4241, "throughputTEU": 900000 },
+    { "id": "houston", "name": "Houston", "lat": 29.7604, "lng": -95.3698, "throughputTEU": 4200000 }
+  ],
+  "factories": [
+    { "id": "shenzhen", "name": "Shenzhen Electronics Cluster", "lat": 22.5431, "lng": 114.0579, "sector": "Electronics", "feederPort": "shanghai" },
+    { "id": "chennai", "name": "Chennai Auto & Components", "lat": 13.0827, "lng": 80.2707, "sector": "Automotive", "feederPort": "nhavasheva" },
+    { "id": "hcmc", "name": "Ho Chi Minh City Apparel/Electronics", "lat": 10.8231, "lng": 106.6297, "sector": "Apparel/Electronics", "feederPort": "singapore" },
+    { "id": "wroclaw", "name": "Wroclaw Industrial Park", "lat": 51.1079, "lng": 17.0385, "sector": "Machinery", "feederPort": "rotterdam" },
+    { "id": "monterrey", "name": "Monterrey Manufacturing Hub", "lat": 25.6866, "lng": -100.3161, "sector": "Automotive/Appliances", "feederPort": "la-lb" },
+    { "id": "guadalajara", "name": "Guadalajara Electronics Valley", "lat": 20.6597, "lng": -103.3496, "sector": "Electronics", "feederPort": "manzanillo" },
+    { "id": "penang", "name": "Penang Semiconductor Cluster", "lat": 5.4141, "lng": 100.3288, "sector": "Semiconductors", "feederPort": "singapore" },
+    { "id": "bangalore", "name": "Bangalore Tech & Components", "lat": 12.9716, "lng": 77.5946, "sector": "Electronics", "feederPort": "nhavasheva" }
+  ],
+  "corridors": [
+    { "id": "shanghai-lalb", "from": "shanghai", "to": "la-lb", "lane": "Trans-Pacific", "baselineDays": 16 },
+    { "id": "ningbo-lalb", "from": "ningbo", "to": "la-lb", "lane": "Trans-Pacific", "baselineDays": 15 },
+    { "id": "busan-lalb", "from": "busan", "to": "la-lb", "lane": "Trans-Pacific", "baselineDays": 11 },
+    { "id": "shanghai-rotterdam", "from": "shanghai", "to": "rotterdam", "lane": "Asia-Europe (Suez)", "baselineDays": 30 },
+    { "id": "singapore-rotterdam", "from": "singapore", "to": "rotterdam", "lane": "Asia-Europe (Suez)", "baselineDays": 26 },
+    { "id": "jebelali-rotterdam", "from": "jebelali", "to": "rotterdam", "lane": "Middle East-Europe (Suez)", "baselineDays": 18 },
+    { "id": "nhavasheva-rotterdam", "from": "nhavasheva", "to": "rotterdam", "lane": "India-Europe (Suez)", "baselineDays": 22 },
+    { "id": "singapore-jebelali", "from": "singapore", "to": "jebelali", "lane": "Intra-Asia/ME", "baselineDays": 9 },
+    { "id": "santos-rotterdam", "from": "santos", "to": "rotterdam", "lane": "South America-Europe", "baselineDays": 17 },
+    { "id": "shanghai-panama-santos", "from": "shanghai", "to": "panama", "lane": "Asia-Panama-East Coast", "baselineDays": 24 },
+    { "id": "panama-houston", "from": "panama", "to": "houston", "lane": "Panama-US Gulf", "baselineDays": 6 },
+    { "id": "shenzhen-shanghai", "from": "shenzhen", "to": "shanghai", "lane": "Feeder", "baselineDays": 2 },
+    { "id": "chennai-nhavasheva", "from": "chennai", "to": "nhavasheva", "lane": "Feeder", "baselineDays": 3 },
+    { "id": "hcmc-singapore", "from": "hcmc", "to": "singapore", "lane": "Feeder", "baselineDays": 2 },
+    { "id": "wroclaw-rotterdam", "from": "wroclaw", "to": "rotterdam", "lane": "Feeder (rail/road)", "baselineDays": 2 },
+    { "id": "monterrey-lalb", "from": "monterrey", "to": "la-lb", "lane": "Feeder (rail/road)", "baselineDays": 3 },
+    { "id": "guadalajara-manzanillo", "from": "guadalajara", "to": "manzanillo", "lane": "Feeder (rail/road)", "baselineDays": 1 },
+    { "id": "penang-singapore", "from": "penang", "to": "singapore", "lane": "Feeder", "baselineDays": 2 },
+    { "id": "bangalore-nhavasheva", "from": "bangalore", "to": "nhavasheva", "lane": "Feeder", "baselineDays": 2 }
+  ]
+}
