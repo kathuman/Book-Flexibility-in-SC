@@ -1,0 +1,80 @@
+# Family with young children — CLAUDE.md Section 5 (verbatim starting-point
+# weights from the spec; direction = access to services). These are starting
+# points; calibration (Section 6 protocol) will change them once real data
+# exists. Do not hand-edit weights/lambda/cap outside scoring-modeler's
+# calibration workflow — log any change in docs/calibration/family-*.md.
+
+profile: family
+label: "Family with young children"
+modes: [foot, bike]
+
+gates:
+  - category: primary_school
+    max_distance_m: 2500
+
+categories:
+  primary_school:
+    kind: nearest
+    weight: 0.20
+    lambda_m: 800
+    sign: 1
+    cap: 1
+
+  kindergarten:
+    kind: nearest
+    weight: 0.15
+    lambda_m: 600
+    sign: 1
+    cap: 1
+
+  playground:
+    kind: nearest
+    weight: 0.10
+    lambda_m: 400
+    sign: 1
+    cap: 3
+
+  green_space:
+    kind: nearest
+    weight: 0.10
+    lambda_m: 500
+    sign: 1
+    cap: 2
+
+  groceries:
+    kind: nearest
+    weight: 0.15
+    lambda_m: 600
+    sign: 1
+    cap: 2
+
+  healthcare_gp:
+    kind: nearest
+    weight: 0.05
+    lambda_m: 1500
+    sign: 1
+    cap: 1
+
+  transit_stop:
+    kind: nearest
+    weight: 0.10
+    lambda_m: 500
+    sign: 1
+    cap: 2
+    min_freq_per_hour: 4
+
+  nightlife:
+    kind: nearest
+    weight: 0.05
+    lambda_m: 200
+    sign: -1
+    cap: 3
+
+  arterial_road:
+    kind: nearest
+    weight: 0.10
+    lambda_m: 150
+    sign: -1
+    cap: 1
+
+building_filter: [apartments, residential, house, terrace, detached, semidetached]

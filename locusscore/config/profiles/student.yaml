@@ -1,0 +1,89 @@
+# Student — CLAUDE.md Section 5/12. Draft starting-point weights (not in the
+# spec verbatim; authored per the spec's guidance and MVP build order).
+# Deliberately differentiated from `family`: nightlife is positive here (was
+# negative for family) and transit/university dominate instead of schools —
+# this is what the Section 6 calibration protocol's Spearman-correlation
+# check (< 0.8 vs. other profiles) is there to verify once real data exists.
+#
+# "Any campus" (nearest wins) per CLAUDE.md Section 12 item 4 — the student
+# does not select an institution. university's nearest-POI source is the
+# curated campus CSV (config/region.yaml -> campuses.csv), not raw OSM
+# amenity=university tags, once that CSV exists (Phase 1).
+#
+# transit_stop's min_freq_per_hour degrades gracefully to "not applicable"
+# until a Rejseplanen GTFS account exists (CLAUDE.md Section 12 item 5).
+
+profile: student
+label: "Student"
+modes: [foot, bike]
+
+gates:
+  - category: university
+    max_distance_m: 6000
+
+categories:
+  university:
+    kind: nearest
+    weight: 0.22
+    lambda_m: 2000
+    sign: 1
+    cap: 1
+
+  transit_stop:
+    kind: nearest
+    weight: 0.18
+    lambda_m: 400
+    sign: 1
+    cap: 2
+    min_freq_per_hour: 6
+
+  groceries:
+    kind: nearest
+    weight: 0.15
+    lambda_m: 500
+    sign: 1
+    cap: 2
+
+  cafe_restaurant:
+    kind: nearest
+    weight: 0.10
+    lambda_m: 400
+    sign: 1
+    cap: 3
+
+  nightlife:
+    kind: nearest
+    weight: 0.07
+    lambda_m: 300
+    sign: 1
+    cap: 2
+
+  culture:
+    kind: nearest
+    weight: 0.07
+    lambda_m: 800
+    sign: 1
+    cap: 2
+
+  coworking:
+    kind: nearest
+    weight: 0.06
+    lambda_m: 800
+    sign: 1
+    cap: 1
+
+  healthcare_gp:
+    kind: nearest
+    weight: 0.05
+    lambda_m: 1500
+    sign: 1
+    cap: 1
+
+  arterial_road:
+    kind: nearest
+    weight: 0.06
+    lambda_m: 150
+    sign: -1
+    cap: 1
+
+building_filter: [apartments, residential, house, terrace, detached, semidetached]

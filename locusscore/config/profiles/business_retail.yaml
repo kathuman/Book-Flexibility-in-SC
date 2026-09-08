@@ -1,0 +1,79 @@
+# Business (generic retail/hospitality catchment) — CLAUDE.md Section 5/12
+# item 3 (generic catchment accepted as default over a specific business
+# type). Draft starting-point weights, authored per the spec's guidance.
+#
+# Direction flips relative to the residential profiles: this scores
+# catchment (what surrounds the location), not access-to-services from it.
+# residential_density, office_density and retail_cluster are `kind: density`
+# categories (Section 6), not nearest-distance. Note arterial_road is
+# POSITIVE here (visibility/passing traffic) versus negative for family/
+# student — another deliberate profile differentiator for the Spearman
+# calibration check.
+#
+# d_ref values below are PLACEHOLDERS. Per Section 6, D_ref must be the
+# regional 90th percentile of D(cell, radius) computed from real building
+# data. These numbers are order-of-magnitude guesses (levels x footprint_m2
+# summed in-radius) and MUST be replaced from the first real ingest run
+# before this profile can be meaningfully calibrated — see
+# docs/calibration/business_retail-*.md once that run exists.
+
+profile: business_retail
+label: "Retail / hospitality business"
+modes: [foot, bike]
+
+gates:
+  - category: transit_stop
+    max_distance_m: 800
+
+categories:
+  residential_density:
+    kind: density
+    weight: 0.25
+    sign: 1
+    radius_m: 500
+    d_ref: 45000  # PLACEHOLDER — see header note
+
+  retail_cluster:
+    kind: density
+    weight: 0.20
+    sign: 1
+    radius_m: 200
+    d_ref: 8000  # PLACEHOLDER — see header note
+
+  transit_stop:
+    kind: nearest
+    weight: 0.20
+    lambda_m: 300
+    sign: 1
+    cap: 2
+    min_freq_per_hour: 6
+
+  office_density:
+    kind: density
+    weight: 0.10
+    sign: 1
+    radius_m: 500
+    d_ref: 20000  # PLACEHOLDER — see header note
+
+  cafe_restaurant:
+    kind: nearest
+    weight: 0.10
+    lambda_m: 300
+    sign: 1
+    cap: 3
+
+  arterial_road:
+    kind: nearest
+    weight: 0.10
+    lambda_m: 300
+    sign: 1
+    cap: 1
+
+  industrial:
+    kind: nearest
+    weight: 0.05
+    lambda_m: 500
+    sign: -1
+    cap: 1
+
+building_filter: [retail, commercial, office]

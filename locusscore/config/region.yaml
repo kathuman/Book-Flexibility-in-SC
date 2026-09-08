@@ -1,0 +1,82 @@
+# LocusScore region config — CLAUDE.md Section 12 item 1 (default accepted)
+#
+# This file is the single region-specific knob set. The pipeline must be
+# region-agnostic: nothing region-specific belongs in code, only here.
+
+region:
+  name: "Region Hovedstaden"
+  label: "Greater Copenhagen"
+  country: DK
+
+extract:
+  source: geofabrik
+  url: "https://download.geofabrik.de/europe/denmark-latest.osm.pbf"
+  # Region Hovedstaden bbox (WGS84 lon/lat, min_lon,min_lat,max_lon,max_lat).
+  # TODO(pipeline-engineer): verify/tighten against the official Region
+  # Hovedstaden administrative boundary (OSM relation) during Phase 1 ingest
+  # instead of this hand-drawn box.
+  bbox: [12.0, 55.5, 12.75, 55.95]
+
+grid:
+  h3_resolution: 9  # ~174 m edge, ~0.1 km^2 — CLAUDE.md Section 4.3
+
+transit:
+  gtfs:
+    provider: rejseplanen
+    # Requires registration (CLAUDE.md Section 12 item 5). Until an account
+    # exists, ingest degrades gracefully: transit_stop scoring runs without
+    # frequency (min_freq_per_hour gates are treated as not-applicable
+    # rather than a hard fail).
+    url: ""  # TODO(pipeline-engineer): fill in once a Rejseplanen account exists
+    has_account: false
+
+routing:
+  osrm:
+    modes: [foot, bike]
+    bike_to_foot_scaling: 0.4  # CLAUDE.md Section 6: bike distances scaled to walking-equivalent
+
+campuses:
+  # Student profile (CLAUDE.md Section 12 item 4): curated CSV overrides the
+  # generic `university` taxonomy category for these institutions. "Any
+  # campus" — nearest wins; the student does not select one.
+  csv: "config/campuses.csv"  # TODO(pipeline-engineer): create during Phase 1 ingest
+  institutions:
+    - "University of Copenhagen (KU) — all campuses"
+    - "Technical University of Denmark (DTU) — Lyngby"
+    - "Copenhagen Business School (CBS)"
+    - "IT University of Copenhagen (ITU)"
+    - "Copenhagen School of Design and Technology (KEA)"
+    - "Aalborg University (AAU) — Copenhagen campus"
+
+# Expected POI counts per taxonomy category, used by pipeline-engineer's
+# ingest sanity check (CLAUDE.md Section 10, Phase 1 acceptance criterion).
+# Placeholder order-of-magnitude ranges for Greater Copenhagen; replace with
+# real numbers logged from the first successful ingest run.
+expected_poi_counts:
+  groceries: [800, 2500]
+  primary_school: [200, 600]
+  kindergarten: [400, 1200]
+  healthcare_gp: [300, 900]
+  pharmacy: [150, 400]
+  hospital: [10, 60]
+  transit_stop: [3000, 9000]
+  green_space: [300, 1500]
+  playground: [500, 2000]
+  sports: [300, 1200]
+  cafe_restaurant: [2000, 6000]
+  nightlife: [400, 1500]
+  culture: [100, 500]
+  university: [10, 80]
+  coworking: [20, 200]
+  arterial_road: [500, 3000]
+  industrial: [200, 1000]
+
+# Calibration anchors (CLAUDE.md Section 6 calibration protocol step 3, and
+# Section 12 item 2). NOT DEFAULTABLE — this is local knowledge the repo
+# owner has to supply; fabricating it would make calibration worthless.
+# Format once filled in:
+#   - name: "<neighbourhood/address>"
+#     profile: family|student|business_retail
+#     expected: good|bad
+#     why: "<one line>"
+calibration_anchors: []  # TODO(repo owner): 3-5 areas per MVP profile, see docs/decisions/0001-mvp-defaults.md

@@ -1,0 +1,47 @@
+# LocusScore offline pipeline stack — CLAUDE.md Section 3 / Section 9.
+#
+# Phase 0 acceptance: `docker compose up` yields healthy PostGIS + OSRM.
+# OSRM containers are placeholders until pipeline-engineer's ingest step
+# (Phase 1) produces the .osrm graph files they mount — they will exit
+# immediately until then; that is expected at this stage, not a bug.
+#
+# Region defaults to Region Hovedstaden per config/region.yaml (CLAUDE.md
+# Section 12 item 1 / item 11 — pipeline runs on a local machine via Docker).
+
+services:
+  postgis:
+    image: postgis/postgis:16-3.4
+    environment:
+      POSTGRES_DB: locusscore
+      POSTGRES_USER: locusscore
+      POSTGRES_PASSWORD: locusscore
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgis-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U locusscore -d locusscore"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  osrm-foot:
+    image: osrm/osrm-backend:v5.27.1
+    command: osrm-routed --algorithm mld /data/denmark-foot.osrm
+    volumes:
+      - ./data/osrm:/data
+    ports:
+      - "5001:5000"
+    # No healthcheck until Phase 1 produces /data/denmark-foot.osrm.
+
+  osrm-bike:
+    image: osrm/osrm-backend:v5.27.1
+    command: osrm-routed --algorithm mld /data/denmark-bike.osrm
+    volumes:
+      - ./data/osrm:/data
+    ports:
+      - "5002:5000"
+    # No healthcheck until Phase 1 produces /data/denmark-bike.osrm.
+
+volumes:
+  postgis-data:

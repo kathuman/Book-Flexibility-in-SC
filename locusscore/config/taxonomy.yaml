@@ -1,0 +1,127 @@
+# LocusScore master taxonomy — CLAUDE.md Section 4.2
+#
+# Each category maps to a scoring `kind` and, for `nearest` categories, a list
+# of OSM tag filters (key=value strings, matched exactly against the tags
+# osm2pgsql loads). `geometry` says how distance is measured:
+#   point   — distance to the point/centroid
+#   polygon — distance to the nearest edge of the polygon (NEVER centroid)
+#   line    — distance to the nearest point on the line (NEVER a node on it)
+# `density` categories have no tag filter here; they are derived from the
+# buildings table (see residential_density / office_density) and computed in
+# pipeline/locus/scoring by summing building:levels x footprint area within
+# a radius, not by nearest distance.
+#
+# Do not invent tags. Cross-check any addition against
+# wiki.openstreetmap.org/wiki/Key:<key> first.
+
+groceries:
+  kind: nearest
+  geometry: point
+  tags: [shop=supermarket, shop=convenience, shop=greengrocer]
+
+primary_school:
+  kind: nearest
+  geometry: point
+  tags: [amenity=school]
+  # TODO(pipeline-engineer): filter by isced:level where the tag is present
+  # once ingest is running against real data.
+
+kindergarten:
+  kind: nearest
+  geometry: point
+  tags: [amenity=kindergarten, amenity=childcare]
+
+healthcare_gp:
+  kind: nearest
+  geometry: point
+  tags: [amenity=doctors, amenity=clinic]
+
+pharmacy:
+  kind: nearest
+  geometry: point
+  tags: [amenity=pharmacy]
+
+hospital:
+  kind: nearest
+  geometry: point
+  tags: [amenity=hospital]
+
+transit_stop:
+  kind: nearest
+  geometry: point
+  tags: [highway=bus_stop, railway=station, railway=tram_stop, station=subway]
+  # Frequency (freq_per_hour) is joined from GTFS in pipeline/locus/ingest,
+  # not from OSM tags.
+
+green_space:
+  kind: nearest
+  geometry: polygon
+  tags: [leisure=park, landuse=forest, natural=wood, leisure=nature_reserve]
+
+playground:
+  kind: nearest
+  geometry: point
+  tags: [leisure=playground]
+
+sports:
+  kind: nearest
+  geometry: point
+  tags: [leisure=sports_centre, leisure=fitness_centre, leisure=pitch, leisure=swimming_pool]
+
+cafe_restaurant:
+  kind: nearest
+  geometry: point
+  tags: [amenity=cafe, amenity=restaurant, amenity=fast_food]
+
+nightlife:
+  kind: nearest
+  geometry: point
+  tags: [amenity=bar, amenity=pub, amenity=nightclub]
+
+culture:
+  kind: nearest
+  geometry: point
+  tags: [amenity=library, amenity=cinema, amenity=theatre, tourism=museum]
+
+university:
+  kind: nearest
+  geometry: point
+  tags: [amenity=university, amenity=college]
+  # Overridden by the curated campus CSV (config/campuses.csv, added when the
+  # student profile's ingest is built) for the named institutions in
+  # CLAUDE.md Section 12 item 4.
+
+coworking:
+  kind: nearest
+  geometry: point
+  tags: [office=coworking, amenity=coworking_space]
+
+arterial_road:
+  kind: nearest
+  geometry: line
+  tags: [highway=motorway, highway=trunk, highway=primary]
+
+industrial:
+  kind: nearest
+  geometry: polygon
+  tags: [landuse=industrial]
+
+residential_density:
+  kind: density
+  derived_from: buildings
+  building_types: [apartments, residential, house, terrace, detached, semidetached]
+  # value = sum(building:levels * footprint_area_m2) within radius
+
+office_density:
+  kind: density
+  derived_from: buildings
+  building_types: [office]
+  extra_tags: [office=*]
+  # value = sum(building:levels * footprint_area_m2) within radius
+
+retail_cluster:
+  kind: density
+  derived_from: pois
+  tags: [shop=*]
+  # Co-location signal for business profiles: count/density of other shops
+  # within radius, not nearest-distance.
