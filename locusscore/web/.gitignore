@@ -1,0 +1,64 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# env files (can opt-in for committing if needed)
+.env*
+!.env.local.example
+
+# vercel
+.vercel
+
+# LocusScore: local-dev-only fixture tiles/detail shards (ADR 0002).
+# Production tiles are NEVER committed and NEVER served from public/ —
+# this directory exists only so pmtiles range-requests work against
+# `npm run dev`. Regenerate with `npm run generate:fixtures`.
+/public/dev-tiles/
+
+# Intermediate GeoJSON tippecanoe input for the fixture build -- also
+# generated, also never committed.
+/scripts/.fixture-build/
+
+# Generated from config/profiles/*.yaml (npm run generate:manifest, also
+# runs automatically via predev/prebuild) -- config YAML is the single
+# source of truth, this file must never be hand-edited or relied on as
+# committed state.
+/lib/style/profile-manifest.json
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# Copied from node_modules/maplibre-gl/dist (npm run copy:worker, also runs
+# automatically via predev/prebuild) -- works around a Turbopack + maplibre-gl
+# worker-URL resolution bug, see lib/tiles.ts and scripts/copy-maplibre-worker.mjs.
+/public/maplibre-gl-worker.mjs
+/public/maplibre-gl-shared.mjs

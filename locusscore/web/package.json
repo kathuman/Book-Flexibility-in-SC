@@ -1,0 +1,35 @@
+{
+  "name": "web",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "predev": "npm run generate:manifest && npm run copy:worker",
+    "prebuild": "npm run generate:manifest && npm run copy:worker",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "generate:manifest": "node scripts/generate-profile-manifest.mjs",
+    "generate:fixtures": "../pipeline/.venv/bin/python scripts/generate_fixture_data.py && bash scripts/build_fixture_tiles.sh",
+    "copy:worker": "node scripts/copy-maplibre-worker.mjs"
+  },
+  "dependencies": {
+    "maplibre-gl": "^6.9.0",
+    "next": "16.3.4",
+    "pmtiles": "^4.5.0",
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/js-yaml": "^4.0.9",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.3.4",
+    "js-yaml": "^5.4.1",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}

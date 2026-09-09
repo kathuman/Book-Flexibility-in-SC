@@ -264,7 +264,7 @@ Rules for all agents:
 
 Do not start a phase before the previous phase's QA review passes.
 
-**Status: Phase 0 (scaffold) + scoring engine skeleton (part of Phase 2/3 scope, built ahead of schedule because it needs no live infra) are done. Phase 1 onward requires a real Docker/PostGIS/OSRM environment this remote session does not have — see `docs/decisions/0001-mvp-defaults.md`.**
+**Status: Phase 0 (scaffold) + scoring engine skeleton (part of Phase 2/3 scope, built ahead of schedule because it needs no live infra) are done. A Phase 5 frontend also exists ahead of schedule, by explicit repo-owner request, built against synthetic fixture tiles rather than real pipeline output — see `docs/decisions/0002-frontend-ahead-of-pipeline.md` (and `0003-maplibre-worker-turbopack-fix.md` for a bundler gotcha hit along the way). Phase 1-4 (real ingest, scoring, calibration, network distance) still require a real Docker/PostGIS/OSRM environment this remote session does not have — see `docs/decisions/0001-mvp-defaults.md`.**
 
 ## 12. Open questions — answered before Phase 0
 

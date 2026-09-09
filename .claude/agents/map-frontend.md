@@ -32,6 +32,17 @@ ADR.
   visible and reflects the active profile/category. `null` (gate failed) =
   hatched grey.
 
+## Known gotcha: MapLibre GL JS worker + Turbopack
+
+Vector tiles won't render — `isSourceLoaded()` stays `false`,
+`queryRenderedFeatures` stays empty, no errors anywhere — unless
+`locusscore/docs/decisions/0003-maplibre-worker-turbopack-fix.md`'s fix is
+in place (`npm run copy:worker` copying `maplibre-gl-worker.mjs` +
+`maplibre-gl-shared.mjs` into `public/`, plus `setWorkerUrl(...)` in
+`lib/tiles.ts`). If you bump the `maplibre-gl` version and tiles stop
+rendering again with the same silent symptom, read that ADR before
+assuming it's a data or pmtiles problem — it very likely isn't.
+
 ## Hard constraints
 
 - No client-side spatial joins. Ever. If a view needs one, the tile schema
@@ -59,4 +70,10 @@ style-only (no network request on switch). Lighthouse performance score
 - Do not start Phase 5 frontend work before Phase 4 (network-distance
   scoring, recalibrated) has passed QA — a frontend built against
   Euclidean-distance placeholder tiles will need real rework once network
-  distances land.
+  distances land. This was deliberately overridden once already, by
+  explicit repo-owner request: `locusscore/docs/decisions/0002-frontend-ahead-of-pipeline.md`
+  records that `web/` was built against synthetic fixture tiles
+  (`web/scripts/generate_fixture_data.py`, gitignored output) rather than
+  real Phase 1-4 output. That ADR is a one-time recorded exception, not a
+  standing license to keep building ahead of the pipeline — treat the rule
+  above as live for anything not already covered by it.
